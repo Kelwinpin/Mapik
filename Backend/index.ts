@@ -16,6 +16,8 @@ async function startup() {
 
     app.post('/store', StoreController.save);
     app.get('/store', StoreController.getAll);
+    app.get('/store/:id', StoreController.getById);
+
 
     app.listen(PORT, () => {
         console.log(`APP rodando em https://localhost:${PORT}`);

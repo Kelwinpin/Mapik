@@ -17,3 +17,10 @@ export async function getAll(req: Request, res: Response) {
     
     return res.status(200).json(allStories);
 }
+
+export async function getById(req: Request, res: Response) {
+
+    const store = await storeRepository.createQueryBuilder("Store").where("store.id = id").getOne();
+    
+    return res.status(200).json(store);
+}
