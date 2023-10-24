@@ -16,7 +16,7 @@ export default function New(){
         description:"",
         contact:"",
         category:"",
-        coords: [0, 0]
+        coords: [-19.9196, -44.0143]
     });
 
     const onSubmit = async() =>{
@@ -83,10 +83,10 @@ export default function New(){
 
                 <Section>Endereço</Section>
                 <MapContainer center={{
-                    lat: coords[0],
-                    lng: coords[1]
+                    lat: -19.9196,
+                    lng: -44.0143
                 } as LatLngExpression}
-                zoom={13}
+                zoom={60}
                 ref ={(map)=>{map?.addEventListener('click', (event: LeafletMouseEvent)=>{
                     setFormValues(prev => ({
                         ...prev,
@@ -98,7 +98,7 @@ export default function New(){
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={[formValues.coords[0], formValues.coords[1]] as LatLngExpression}/>
+                    <Marker position={[ formValues.coords[0], formValues.coords[1]] as LatLngExpression}/>
 
                 </MapContainer>
 
