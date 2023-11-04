@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, Platform, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, Platform, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Button } from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import { categories } from "./categories";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Drawer, IconButton } from "react-native-paper";
 
 export interface IMarker {
     category: string;
@@ -16,6 +17,7 @@ export interface IMarker {
 
 export default function Home(){
     const [filter, setFilter] = useState('');
+    const [visibleMenu, setVisibleMenu] = useState(false)
     const [markers, setMarkers] = useState<IMarker[]>([]);
     const navigation = useNavigation();
 
@@ -34,10 +36,34 @@ export default function Home(){
 
     return(
         <SafeAreaView style={styles.container}>
-            <View>
-                <Text style={styles.title}>Bem vindo</Text>
-                <Text style={styles.subTitle}>Encontre no mapa um ponto de seu interesse</Text>
+            <View style={styles.headerContainer}>
+
+              <IconButton 
+                icon={require("../../../assets/menu.png")} 
+                size={32} 
+                onPress={()=>setVisibleMenu(!visibleMenu)}
+              />
+                <View>
+                  <Text style={styles.title}>Bem vindo</Text>
+                  <Text style={styles.subTitle}>Encontre no mapa um ponto de seu interesse</Text>
+                </View>
+                
             </View>
+              {visibleMenu && 
+                (<Drawer.Section showDivider>
+                  <FlatList 
+                  data={categories}
+                  horizontal
+                  renderItem={({ item })=>(
+                  <Drawer.Item 
+                    label={item.label} 
+                    onPress={()=>{setFilter(filter === item.key ? "" : item.key)}}
+                    icon={item.image}
+                  />
+                  )}
+                  />
+                  </Drawer.Section>)
+              }
             <MapView style={styles.map} 
             initialRegion={{
                 latitude:-19.9196,
@@ -59,26 +85,8 @@ export default function Home(){
                     )
                 })}
             </MapView>
-            <View>
-                <FlatList 
-                  data={categories}
-                  horizontal
-                  ItemSeparatorComponent={() => <View style={{ width: 10}}/>}
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{
-                    alignItems: "center"
-                  }}
-                  renderItem={({ item })=>(
-                    <TouchableOpacity 
-                      style={[styles.categoryItem, filter === item.key ? styles.selectedCategory : null]} 
-                      key={item.key} 
-                      onPress={()=>{setFilter(filter === item.key ? "" : item.key)}}
-                    >
-                        <Image style={styles.categoryImage} source={item.image} />
-                        <Text style={styles.categoryText}>{item.label}</Text>
-                    </TouchableOpacity>
-                )}
-                />
+            <View style={styles.categoryImage}>
+                <Image source={require("../../../assets/vale.png")}/>
             </View>
         </SafeAreaView>
     )
@@ -90,8 +98,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   headerContainer: {
-    padding: 20,
+    padding: 8,
     paddingTop: Platform.OS === "android" ? 50 : 0,
+    flexDirection: "row",
+    alignItems: "center"
   },
   title: {
     fontSize: 24,
@@ -118,8 +128,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   categoryImage: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
   },
   categoryText: {
     textAlign: "center",
