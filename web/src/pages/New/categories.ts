@@ -1,16 +1,18 @@
 export const categories = [
-  { key: "basket", label: "Vestuário", url: "media/basket.png" },
-  { key: "gas", label: "Combustível", url: "media/gas.png" },
+  { key: "Store", label: "Loja", url: "media/Store.png" },
+  { key: "Snack", label: "Lanchonete", url: "media/Snack.png" },
   {
-    key: "hospital",
-    label: "Farmácia/Hospital",
-    url: "media/hospital.png",
+    key: "Palette",
+    label: "Obra de arte",
+    url: "media/Palette.png",
   },
-  { key: "pet", label: "Pet Shop", url: "media/pet.png" },
+  { key: "Bus", label: "Ponto de ônibus", url: "media/Bus.png" },
   {
-    key: "restaurant",
+    key: "Restaurant",
     label: "Restaurante",
     url: "media/restaurant.png",
   },
-  { key: "shopping", label: "Mercado", url: "media/shopping.png" },
+  { key: "Reception", label: "Recepção", url: "media/Reception.png" },
+  { key: "Parking", label: "Estacionamento", url: "media/Parking.png" },
+  { key: "Pool", label: "Piscina", url: "media/Pool.png" },
 ];

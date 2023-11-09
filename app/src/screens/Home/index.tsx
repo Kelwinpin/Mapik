@@ -4,7 +4,7 @@ import { categories } from "./categories";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Drawer, IconButton } from "react-native-paper";
-
+import { Icon } from "../../components/Icon";
 export interface IMarker {
     category: string;
     contact: string;
@@ -55,11 +55,14 @@ export default function Home(){
                   data={categories}
                   horizontal
                   renderItem={({ item })=>(
-                  <Drawer.Item 
-                    label={item.label} 
-                    onPress={()=>{setFilter(filter === item.key ? "" : item.key)}}
-                    icon={item.image}
-                  />
+                    
+                      <TouchableOpacity onPress={()=>{setFilter(filter === item.key ? "" : item.key)}}>
+                          <View style={styles.iconButton}>
+                            {item.icon}
+                          <Text>{item.label}</Text>
+                          </View>
+                      </TouchableOpacity>
+                    
                   )}
                   />
                   </Drawer.Section>)
@@ -107,6 +110,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "400",
     color: "#322153",
+  },
+  iconButton:{
+    padding:8,
+    alignItems: "center",
+    flexDirection: "column",
+    textAlign: "center"
   },
   subTitle: {
     fontSize: 14,
