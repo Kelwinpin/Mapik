@@ -54,15 +54,13 @@ export default function Home(){
                   <FlatList 
                   data={categories}
                   horizontal
-                  renderItem={({ item })=>(
-                    
+                  renderItem={({ item })=>(                    
                       <TouchableOpacity onPress={()=>{setFilter(filter === item.key ? "" : item.key)}}>
                           <View style={styles.iconButton}>
                             {item.icon}
-                          <Text>{item.label}</Text>
+                            <Text>{item.label}</Text>
                           </View>
                       </TouchableOpacity>
-                    
                   )}
                   />
                   </Drawer.Section>)

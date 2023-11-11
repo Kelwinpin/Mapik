@@ -18,8 +18,6 @@ export interface IconProps {
   type: IconType;
   color?: string;
   size?: string | number;
-  weight?: "thin" | "light" | "regular" | "bold" | "fill" | "duotone";
-  mirrored?: boolean;
 }
 
 export function Icon({ type, size = 32, ...props }: IconProps) {
