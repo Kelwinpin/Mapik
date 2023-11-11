@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, Platform, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Button } from "react-native";
+import { View, Text, StyleSheet, Platform, SafeAreaView, FlatList, TouchableOpacity, ActivityIndicator, ImageComponent } from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import { categories } from "./categories";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Drawer, IconButton } from "react-native-paper";
-import { Icon } from "../../components/Icon";
+import { Announcement } from "../../components/Announcement";
+
+
 export interface IMarker {
     category: string;
     contact: string;
@@ -86,9 +88,7 @@ export default function Home(){
                     )
                 })}
             </MapView>
-            <View style={styles.categoryImage}>
-                <Image source={require("../../../assets/vale.png")}/>
-            </View>
+            <Announcement/>
         </SafeAreaView>
     )
 }
@@ -133,10 +133,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-  },
-  categoryImage: {
-    width: 70,
-    height: 70,
   },
   categoryText: {
     textAlign: "center",
